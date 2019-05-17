@@ -5,8 +5,12 @@ import "./App.scss";
 import * as ai from "../../public/images/ai.png";
 
 export default class App extends React.Component{
-  render() {
-      console.log({file: ai});
+  x = (): number => {
+    const a = 2;
+    return a;
+  }
+  render(): React.ReactNode {
+    console.log({file: ai});
     return (
       <div className="app">
         This is test app. xD huehue
