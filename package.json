@@ -13,6 +13,7 @@
     "dev:server-start": "NODE_ENV=development nodemon dist/server.bundle.js",
     "dev:client": "webpack-dev-server --config ./webpack/webpack.config.dev.babel.js",
     "linter": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx --ignore-path .gitignore ./src",
+    "typecheck": "tsc --noEmit",
     "linter-fix": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx --color --ignore-path .gitignore ./src --fix",
     "prebuild": "eslint --max-warnings 0 --ext .js --ext .jsx --ext .ts --ext .tsx --ignore-path .gitignore ./src",
     "build": "npm run build:clean && npm run build:server && npm run build:client",
