@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Button } from "semantic-ui-react";
 
 type num = 2 | 3;
 
@@ -25,14 +26,22 @@ export default class TestComponent extends React.Component<IProps, IState> {
   }
 
   componentDidMount(): void {
+    this.setState({
+      someNumber: 2,
+    });
+  }
 
+  handleButtonOnClick = async (): Promise<void> => {
+    const resp = await fetch("/api").then(r => r.json());
+    alert(resp.test);
   }
 
   render(): React.ReactNode {
-    const { text, onFunc } = this.props;
+    const { text } = this.props;
     return (
-      <div onClick={onFunc}>
-        {text}
+      <div>
+        Test?
+        <Button content={text} onClick={this.handleButtonOnClick} />
       </div>
     );
   }

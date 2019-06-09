@@ -33,7 +33,6 @@ module.exports = {
     "@typescript-eslint/camelcase": "warn",
     "@typescript-eslint/class-name-casing": "warn",
     "@typescript-eslint/func-call-spacing": "error",
-    "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/indent": ["warn", 2, {
       "VariableDeclarator": {
         "let": 2,

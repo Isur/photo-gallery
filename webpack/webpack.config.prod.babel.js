@@ -1,5 +1,6 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 
 export default {
   context: path.resolve(__dirname, "../src/"),
@@ -8,8 +9,8 @@ export default {
   },
   mode: "production",
   output: {
-    filename: "[name].[hash].bundle.js",
-    path: path.resolve(__dirname, "../dist/"),
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "../build"),
     publicPath: "./",
   },
   module: {
@@ -41,10 +42,6 @@ export default {
         test: /\.css$/,
         loader: ["style-loader", "css-loader"],
       },
-      {
-        test: /\.(png|svg|eot|ttf|woff2?)$/,
-        loader: ["file-loader"],
-      },
     ],
   },
   resolve: {
@@ -52,7 +49,10 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "../public/index.html"),
+      template: path.resolve(__dirname, "../src/index.html"),
     }),
+    new CopyWebpackPlugin([
+      { from: "../public", to: "public/" },
+    ]),
   ],
 };

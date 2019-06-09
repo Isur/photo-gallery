@@ -3,6 +3,7 @@ import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export default {
+  target: "web",
   context: path.resolve(__dirname, "../src/"),
   entry: {
     client: "./client/index.tsx",
@@ -10,7 +11,7 @@ export default {
   mode: "development",
   output: {
     filename: "[name].[hash].bundle.js",
-    path: path.resolve(__dirname, "./dist/"),
+    path: path.resolve(__dirname, "../dist/"),
     publicPath: "/",
   },
   module: {
@@ -49,7 +50,7 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "../public/index.html"),
+      template: path.resolve(__dirname, "../src/index.html"),
     }),
   ],
   devServer: {
@@ -62,7 +63,8 @@ export default {
       errors: true,
     },
     proxy: {
-      "/api": "http://localhost:5003",
+      "/api": "http://localhost:5004",
+      "changeOrigin": true,
     },
   },
   devtool: "source-map",
