@@ -1,11 +1,10 @@
 {
-  "name": "webpack-no-tut-just-doc",
+  "name": "boilerplate-react-node",
   "version": "1.0.0",
-  "description": "Webpack training",
-  "main": "index.js",
+  "description": "React, Node, Express, Typescript, Babel, Webpack, Eslint, SemanticUI, SASS",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predev": "npm run linter-fix",
+    "predev": "npm run linter-fix & rm -rf dist/",
     "dev": "npm run dev:server & npm run dev:client",
     "dev:server": "NODE_ENV=development webpack --config ./webpack/webpack.config.server.babel.js",
     "dev:server-start": "NODE_ENV=development nodemon dist/server.bundle.js",
@@ -24,7 +23,11 @@
     "typescript",
     "node",
     "react",
-    "babel"
+    "babel",
+    "express",
+    "sass",
+    "semanticui",
+    "eslint"
   ],
   "author": "Isur",
   "license": "MIT",

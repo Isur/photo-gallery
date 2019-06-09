@@ -3,4 +3,7 @@ $bgColor: grey;
 
 .app {
     background-color: $bgColor;
+    img {
+        max-width: 80%;
+    }
 }

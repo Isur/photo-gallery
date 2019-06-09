@@ -43,7 +43,7 @@ export default class App extends React.Component<{}, IState> {
     return (
       <div className="app">
         This is test app. xD huehue
-        <img src="/public/images/ai.png" alt="AI" onClick={this.handleFunc} />
+        <img src="/public/images/ai.jpg" alt="AI" onClick={this.handleFunc} />
         <Menu>
           <Menu.Item content="test" />
         </Menu> test <TestComponent text="lul" onFunc={this.handleFunc} /> {x};
