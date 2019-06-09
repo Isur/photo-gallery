@@ -5,12 +5,13 @@ import bodyParser from "body-parser";
 import chalk from "chalk";
 
 const app = express();
+const port = process.env.PORT || 5004;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api", (req, res): void => {
-  res.json({ test: "api response" });
+  res.json({ test: `Hello, I am server working on port ${port}` });
 });
 
 if(process.env.NODE_ENV === "production") {
@@ -20,7 +21,6 @@ if(process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.PORT || 5004;
 app.listen(port, () => console.log(`${chalk.yellow.bold("Server started on port")} ${chalk.red.bold(`${port}`)}`));
 
 export default app;

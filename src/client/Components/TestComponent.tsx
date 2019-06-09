@@ -9,26 +9,16 @@ interface IProps {
 }
 
 interface IState{
-  empty: boolean,
   someNumber: num,
 }
-
-interface IS { x: boolean, y: boolean }
 
 export default class TestComponent extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
     this.state = {
-      empty: false,
       someNumber: 3,
     };
-  }
-
-  componentDidMount(): void {
-    this.setState({
-      someNumber: 2,
-    });
   }
 
   handleButtonOnClick = async (): Promise<void> => {
@@ -40,7 +30,6 @@ export default class TestComponent extends React.Component<IProps, IState> {
     const { text } = this.props;
     return (
       <div>
-        Test?
         <Button content={text} onClick={this.handleButtonOnClick} />
       </div>
     );

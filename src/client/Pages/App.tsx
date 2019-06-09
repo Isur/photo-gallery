@@ -1,54 +1,23 @@
 import * as React from "react";
-import { Menu } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import TestComponent from "../Components/TestComponent";
 import "./App.scss";
-// import * as ai from "../../public/images/ai.png";
 
-interface IState {
-  test: number,
-}
+interface IState {}
 
-export default class App extends React.Component<{}, IState> {
-  ref: React.Ref<HTMLDivElement>
+interface IProps {}
 
-  constructor(props: {}) {
-    super(props);
-
-    this.state = {
-      test: 1,
-    };
-  }
-
-  componentDidMount(): void{
-
-  }
-
-  x = (): number => {
-    const a = 2;
-    return a;
-  }
-
-  y(a: string): string {
-    return a;
-  }
-
+export default class App extends React.Component<IProps, IState> {
   handleFunc = (): void => {
-    alert("heh, ai");
+    alert("Hi!");
   }
 
   render(): React.ReactNode {
-    const { test: xD } = this.state;
-    const y = this.x();
-    const x = 4;
     return (
       <div className="app">
-        This is test app. xD huehue
+        <Header as="h1" className="header" content="This is react / node boilerplate" />
         <img src="/public/images/ai.jpg" alt="AI" onClick={this.handleFunc} />
-        <Menu>
-          <Menu.Item content="test" />
-        </Menu> test <TestComponent text="lul" onFunc={this.handleFunc} /> {x};
-        <div> {y} </div>
-        {xD}
+        <TestComponent text="This is test component" onFunc={this.handleFunc} />
       </div>
     );
   }

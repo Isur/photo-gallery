@@ -2,6 +2,9 @@
   "name": "boilerplate-react-node",
   "version": "1.0.0",
   "description": "React, Node, Express, Typescript, Babel, Webpack, Eslint, SemanticUI, SASS",
+  "repository": "https://github.com/Isur/boilerplate-react-node.git",
+  "author": "Isur",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predev": "npm run linter-fix & rm -rf dist/",
@@ -29,8 +32,6 @@
     "semanticui",
     "eslint"
   ],
-  "author": "Isur",
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
