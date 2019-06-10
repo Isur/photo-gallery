@@ -8,5 +8,6 @@
 .eslintcache
 # logs
 npm-debug.log
-
+# configs
+/src/config.js
 
