@@ -1,8 +1,8 @@
 {
-  "name": "boilerplate-react-node",
+  "name": "photo-gallery",
   "version": "1.0.0",
-  "description": "React, Node, Express, Typescript, Babel, Webpack, Eslint, SemanticUI, SASS",
-  "repository": "https://github.com/Isur/boilerplate-react-node.git",
+  "description": "Photo gallery created on my own boilerplate.",
+  "repository": "https://github.com/Isur/photo-gallery.git",
   "author": "Isur",
   "license": "MIT",
   "scripts": {
@@ -31,7 +31,9 @@
     "express",
     "sass",
     "semanticui",
-    "eslint"
+    "eslint",
+    "photo",
+    "gallery",
   ],
   "devDependencies": {
     "@babel/core": "^7.4.4",
