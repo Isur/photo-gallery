@@ -2,9 +2,9 @@ import * as React from "react";
 import Gallery from "react-image-gallery";
 import { Loader, Dimmer, Icon } from "semantic-ui-react";
 import _ from "lodash";
-import { images } from "../Components/images";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import "./App.scss";
+import { images } from "../Components/images";
 
 interface IState {
   page: number,
@@ -50,10 +50,8 @@ export default class App extends React.Component<IProps, IState> {
       original: img.src,
       thumbnail: img.src,
       caption: img.title,
-      orientation: 5,
       thumbnailTitle: img.title,
       description: img.desc,
-      originalClass: "bigImg",
     }));
     
     this.setState({ loading: false });
@@ -142,7 +140,7 @@ export default class App extends React.Component<IProps, IState> {
         <div className="gallery" ref={this.refGallery}>
           <div className="gal">
             <Gallery items={this.images}
-                  //  showBullets
+                     defaultImage="/public/placeholder.png"
                      showIndex />
           </div>
         </div>
