@@ -34,6 +34,13 @@ module.exports = {
     "@typescript-eslint/class-name-casing": "warn",
     "@typescript-eslint/func-call-spacing": "error",
     "@typescript-eslint/indent": ["warn", 2, {
+      "ignoredNodes": [
+        "JSXElement",
+        "JSXElement *",
+        "JSXAttribute",
+        "ConditionalExpression",
+        "TSUnionType"
+      ],
       "VariableDeclarator": {
         "let": 2,
         "var": 2,
@@ -141,6 +148,7 @@ module.exports = {
     "linebreak-style": "error",
     "lines-between-class-members": "warn",
     "max-len":["error", {
+      "code": 100,
       "comments": 65,
       "ignoreUrls": true,
       "ignoreStrings": true,
@@ -248,7 +256,7 @@ module.exports = {
     "react/void-dom-elements-no-children": "warn",
     "react/jsx-boolean-value": "warn",
     "react/jsx-closing-bracket-location": ["warn", "after-props"],
-    "react/jsx-closing-tag-location": "warn",
+    // "react/jsx-closing-tag-location": "warn",
     "react/jsx-curly-spacing": "warn",
     "react/jsx-equals-spacing": "warn",
     "react/jsx-filename-extension": ["warn", {

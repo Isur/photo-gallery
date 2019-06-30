@@ -33,7 +33,7 @@
     "semanticui",
     "eslint",
     "photo",
-    "gallery",
+    "gallery"
   ],
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -42,6 +42,7 @@
     "@babel/register": "^7.4.4",
     "@types/body-parser": "^1.17.0",
     "@types/express": "^4.17.0",
+    "@types/lodash": "^4.14.135",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
@@ -75,7 +76,13 @@
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-grid-gallery": "^0.5.5",
+    "react-image-gallery": "^0.8.17",
+    "react-image-lightbox": "^5.1.0",
+    "react-images": "^1.0.0",
+    "react-photo-gallery": "^7.0.2"
   }
 }
