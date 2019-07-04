@@ -7,28 +7,32 @@ $bgColor: grey;
         position: fixed;
         top: 1em;
         left: 1em;
+        z-index: 1000;
+        cursor: pointer;
     }
     .goDown{
         position: fixed;
         bottom: 1em;
         left: 1em;
+        z-index: 1000;
+        cursor: pointer;
     }
    .gallery{
-       height: 100vh;
+        min-height: 100vh;
+       height: auto;
        width: 100vw;
        display: flex;
        justify-content: center;
        align-items: center;
        .gal{
-           width: 60vw;
-           max-height: 90vh;
-           background-color: rgba(1,1,1,0.5);
-           padding: 0em;
-
+        // height: 70%;
+        max-width: 80%;
+        background: black;
            @media screen and (max-width: 750px){
                width: 90vw;
            }
-       }
+        
+        }
     }
     .header{ 
         height: 100vh;
@@ -74,6 +78,10 @@ $bgColor: grey;
             @media screen and (min-width:1000px){
               font-size: 7vw;
               line-height: 10vw;
+            }
+            @media screen and (min-width:1600px){
+              font-size: 5vw;
+              line-height: 7vw;
             }
             text-transform: uppercase;
             letter-spacing: 0.1em;

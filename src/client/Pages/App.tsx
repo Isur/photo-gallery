@@ -1,14 +1,18 @@
 import * as React from "react";
-import Gallery from "react-image-gallery";
+// import Gallery from "react-image-gallery";
 import { Loader, Dimmer, Icon } from "semantic-ui-react";
 import _ from "lodash";
 import "react-image-gallery/styles/scss/image-gallery.scss";
+import Gallery from "react-photo-gallery";
+import ReactBnbGallery from "react-bnb-gallery";
 import "./App.scss";
 import { images } from "../Components/images";
 
 interface IState {
   page: number,
   loading: boolean,
+  galleryIsOpen: boolean,
+  currentImage: number,
 }
 
 interface IImage {
@@ -23,11 +27,15 @@ interface IProps {}
 export default class App extends React.Component<IProps, IState> {
   images: IImage[];
 
+  images2: { photo: string, src: string, width: number, height: number }[];
+
   refStart: React.RefObject<HTMLDivElement>;
 
   refGallery: React.RefObject<HTMLDivElement>;
 
   refDev: React.RefObject<HTMLDivElement>;
+
+  refLoc: React.RefObject<HTMLDivElement>;
 
   refEnd: React.RefObject<HTMLDivElement>;
 
@@ -37,10 +45,13 @@ export default class App extends React.Component<IProps, IState> {
     this.state = {
       page: 0,
       loading: true,
+      galleryIsOpen: false,
+      currentImage: 0,
     };
     this.refStart = React.createRef();
     this.refGallery = React.createRef();
     this.refDev = React.createRef();
+    this.refLoc = React.createRef();
     this.refEnd = React.createRef();
   }
   
@@ -52,8 +63,18 @@ export default class App extends React.Component<IProps, IState> {
       caption: img.title,
       thumbnailTitle: img.title,
       description: img.desc,
+      originalClass: "originalImage",
+      thumbnailClass: "thumbnailImage",
     }));
-    
+    this.images2 = images.map((img, index) => ({
+      photo: img.src,
+      number: index,
+      caption: img.desc,
+      subcaption: img.title,
+      width: img.orientation === "portrait" ? 2 : 3,
+      height: img.orientation === "portrait" ? 3 : 2,
+      src: img.src,
+    }));
     this.setState({ loading: false });
   }
 
@@ -62,7 +83,9 @@ export default class App extends React.Component<IProps, IState> {
   }
 
   handleScroll = () => {
-    if(window.pageYOffset > 0.5 * window.innerHeight + this.refDev.current.offsetTop) {
+    if(window.pageYOffset > 0.5 * window.innerHeight + this.refLoc.current.offsetTop) {
+      this.setState({ page: 4 });
+    } else if(window.pageYOffset > 0.5 * window.innerHeight + this.refDev.current.offsetTop) {
       this.setState({ page: 3 });
     } else if(window.pageYOffset > 0.5 * window.innerHeight + this.refGallery.current.offsetTop) {
       this.setState({ page: 2 });
@@ -88,6 +111,10 @@ export default class App extends React.Component<IProps, IState> {
         window.scrollTo({ behavior: "smooth", top: this.refDev.current.offsetTop });
         this.setState({ page: 2 });
         break;
+      case 4:
+        window.scrollTo({ behavior: "smooth", top: this.refLoc.current.offsetTop });
+        this.setState({ page: 3 });
+        break;
       default: break;
     }
   }
@@ -104,15 +131,23 @@ export default class App extends React.Component<IProps, IState> {
         this.setState({ page: 2 });
         break;
       case 2:
-        window.scrollTo({ behavior: "smooth", top: this.refEnd.current.offsetTop });
+        window.scrollTo({ behavior: "smooth", top: this.refLoc.current.offsetTop });
         this.setState({ page: 3 });
+        break;
+      case 3:
+        window.scrollTo({ behavior: "smooth", top: this.refEnd.current.offsetTop });
+        this.setState({ page: 4 });
         break;
       default: break;
     }
   }
 
+  handleToggleGallery = (i = this.state.currentImage) => {
+    this.setState(state => ({ galleryIsOpen: !state.galleryIsOpen, currentImage: i }));
+  }
+
   render(): React.ReactNode {
-    const { page, loading } = this.state;
+    const { page, loading, galleryIsOpen, currentImage } = this.state;
     if(this.images == undefined || loading) {
       return (
         <Dimmer active>
@@ -124,36 +159,47 @@ export default class App extends React.Component<IProps, IState> {
         {page > 0 && <div className="goUp">
           <Icon color="teal" name="angle double up" size="massive" onClick={this.handleScrollUp} />
         </div>}
-        {page < 3 && <div className="goDown">
+        {page < 4 && <div className="goDown">
           <Icon color="teal" name="angle double down" size="massive" onClick={this.handleScrollDown} />
         </div>}
         <div className="header" ref={this.refStart}>
           <div className="header-01">
             <h1 className="header-02">
-            Informatyka, MS
+            Makro
               <em>Fotografia</em>
-            Projekt
+            Natura
             </h1>
           </div>
         </div>
 
         <div className="gallery" ref={this.refGallery}>
           <div className="gal">
-            <Gallery items={this.images}
-                     defaultImage="/public/placeholder.png"
-                     showIndex />
+            <Gallery photos={this.images2} onClick={(e, i) => this.handleToggleGallery(i.index)} />
           </div>
+          <ReactBnbGallery photos={this.images2}
+                           show={galleryIsOpen}
+                           onClose={this.handleToggleGallery}
+                           activePhotoIndex={currentImage} />
         </div>
 
         <div className="header" ref={this.refDev}>
           <div className="header-01">
             <h1 className="header-02">
             Sprzęt
-              <em>CANON 700D</em>
-              <p> Ogniskowa </p>
-              <p> Jakiś </p>
-              <p> Jakis parametr </p>
-              <p> Jakis parametr 2 </p>
+              <em>Nikon D5100</em>
+              <p> Matryca: 16,2 Mpix </p>
+              <em> Obiektyw: </em>
+              <p> Ogniskowa: </p>
+              
+            </h1>
+          </div>
+        </div>
+
+        <div className="header" ref={this.refLoc}>
+          <div className="header-01">
+            <h1 className="header-02">
+              Lokalizacja:
+              <em>Park w ...</em>
             </h1>
           </div>
         </div>
