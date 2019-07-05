@@ -3,6 +3,7 @@ import path from "path";
 import express from "express";
 import bodyParser from "body-parser";
 import chalk from "chalk";
+import * as api from "./api";
 
 const app = express();
 const port = process.env.PORT || 5004;
@@ -10,9 +11,7 @@ const port = process.env.PORT || 5004;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/api", (req, res): void => {
-  res.json({ test: `Hello, I am server working on port ${port}` });
-});
+app.use("/api", api.router);
 
 if(process.env.NODE_ENV === "production") {
   app.use(express.static("build"));

@@ -149,7 +149,7 @@ module.exports = {
     "lines-between-class-members": "warn",
     "max-len":["error", {
       "code": 100,
-      "comments": 65,
+      "comments": 120,
       "ignoreUrls": true,
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true,

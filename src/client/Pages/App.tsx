@@ -1,19 +1,28 @@
 import * as React from "react";
 // import Gallery from "react-image-gallery";
+import axios from "axios";
 import { Loader, Dimmer, Icon } from "semantic-ui-react";
 import _ from "lodash";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import Gallery from "react-photo-gallery";
 import ReactBnbGallery from "react-bnb-gallery";
 import "./App.scss";
-import { images } from "../Components/images";
 
 interface IState {
   page: number,
   loading: boolean,
   galleryIsOpen: boolean,
   currentImage: number,
+  images: MyImages,
 }
+
+type MyImages = {
+  photo: string,
+  src: string,
+  width: number,
+  height: number,
+  subcaption: string,
+  caption: string, }[];
 
 interface IImage {
   original: string,
@@ -23,12 +32,10 @@ interface IImage {
 }
 
 interface IProps {}
-
+const sleep = (milliseconds: number) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 export default class App extends React.Component<IProps, IState> {
-  images: IImage[];
-
-  images2: { photo: string, src: string, width: number, height: number }[];
-
   refStart: React.RefObject<HTMLDivElement>;
 
   refGallery: React.RefObject<HTMLDivElement>;
@@ -47,6 +54,7 @@ export default class App extends React.Component<IProps, IState> {
       loading: true,
       galleryIsOpen: false,
       currentImage: 0,
+      images: [],
     };
     this.refStart = React.createRef();
     this.refGallery = React.createRef();
@@ -55,31 +63,38 @@ export default class App extends React.Component<IProps, IState> {
     this.refEnd = React.createRef();
   }
   
-  componentDidMount() {
+  async componentDidMount() {
+    const response = await axios({
+      method: "get",
+      url: "/api/images/counter",
+    });
+    this.getPhotos(response.data.counter);
     window.addEventListener("scroll", _.debounce(this.handleScroll, 100));
-    this.images = images.map(img => ({
-      original: img.src,
-      thumbnail: img.src,
-      caption: img.title,
-      thumbnailTitle: img.title,
-      description: img.desc,
-      originalClass: "originalImage",
-      thumbnailClass: "thumbnailImage",
-    }));
-    this.images2 = images.map((img, index) => ({
-      photo: img.src,
-      number: index,
-      caption: img.desc,
-      subcaption: img.title,
-      width: img.orientation === "portrait" ? 2 : 3,
-      height: img.orientation === "portrait" ? 3 : 2,
-      src: img.src,
-    }));
     this.setState({ loading: false });
   }
-
+  
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  getPhotos = async (count: number) => {
+    for(let i = 0; i < count; i++) {
+      const response = await axios({
+        method: "get",
+        url: `/api/images/${i}`,
+      });
+      const img = {
+        src: `data:image/jpg;base64, ${response.data.image.base64}`,
+        width: response.data.image.orientation === "portrait" ? 2 : 3,
+        height: response.data.image.orientation === "portrait" ? 3 : 2,
+        subcaption: response.data.image.title,
+        caption: response.data.image.desc,
+        photo: `data:image/jpg;base64, ${response.data.image.base64}`,
+      };
+
+      this.setState(state => ({ images: [...state.images, img] }));
+    }
+    await sleep(1000);
   }
 
   handleScroll = () => {
@@ -147,8 +162,8 @@ export default class App extends React.Component<IProps, IState> {
   }
 
   render(): React.ReactNode {
-    const { page, loading, galleryIsOpen, currentImage } = this.state;
-    if(this.images == undefined || loading) {
+    const { page, loading, galleryIsOpen, currentImage, images } = this.state;
+    if(images.length === 0 || loading) {
       return (
         <Dimmer active>
           <Loader size="massive">Loading</Loader>
@@ -157,10 +172,10 @@ export default class App extends React.Component<IProps, IState> {
     return (
       <div className="App">\
         {page > 0 && <div className="goUp">
-          <Icon color="teal" name="angle double up" size="massive" onClick={this.handleScrollUp} />
+          <Icon color="teal" name="angle double up" size="huge" onClick={this.handleScrollUp} />
         </div>}
         {page < 4 && <div className="goDown">
-          <Icon color="teal" name="angle double down" size="massive" onClick={this.handleScrollDown} />
+          <Icon color="teal" name="angle double down" size="huge" onClick={this.handleScrollDown} />
         </div>}
         <div className="header" ref={this.refStart}>
           <div className="header-01">
@@ -174,9 +189,9 @@ export default class App extends React.Component<IProps, IState> {
 
         <div className="gallery" ref={this.refGallery}>
           <div className="gal">
-            <Gallery photos={this.images2} onClick={(e, i) => this.handleToggleGallery(i.index)} />
+            <Gallery photos={images} onClick={(e, i) => this.handleToggleGallery(i.index)} />
           </div>
-          <ReactBnbGallery photos={this.images2}
+          <ReactBnbGallery photos={images}
                            show={galleryIsOpen}
                            onClose={this.handleToggleGallery}
                            activePhotoIndex={currentImage} />
@@ -185,11 +200,12 @@ export default class App extends React.Component<IProps, IState> {
         <div className="header" ref={this.refDev}>
           <div className="header-01">
             <h1 className="header-02">
-            Sprzęt
-              <em>Nikon D5100</em>
-              <p> Matryca: 16,2 Mpix </p>
-              <em> Obiektyw: </em>
-              <p> Ogniskowa: </p>
+              <em> Lustrzanki: </em>
+              <p>Nikon D5100</p>
+              <p> Nikon D50 </p>
+              <em> Obiektywy: </em>
+              <p> AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR </p>
+              <p> AF-S Nikkor 18-70mm 1:3.5-4.5G ED </p>
               
             </h1>
           </div>
@@ -199,7 +215,7 @@ export default class App extends React.Component<IProps, IState> {
           <div className="header-01">
             <h1 className="header-02">
               Lokalizacja:
-              <em>Park w ...</em>
+              <em>3 Stawy - Katowice</em>
             </h1>
           </div>
         </div>
