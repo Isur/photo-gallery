@@ -1,5 +1,4 @@
 import * as React from "react";
-// import Gallery from "react-image-gallery";
 import axios from "axios";
 import { Loader, Dimmer, Icon } from "semantic-ui-react";
 import _ from "lodash";
@@ -32,9 +31,7 @@ interface IImage {
 }
 
 interface IProps {}
-const sleep = (milliseconds: number) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
-};
+
 export default class App extends React.Component<IProps, IState> {
   refStart: React.RefObject<HTMLDivElement>;
 
@@ -94,7 +91,6 @@ export default class App extends React.Component<IProps, IState> {
 
       this.setState(state => ({ images: [...state.images, img] }));
     }
-    await sleep(1000);
   }
 
   handleScroll = () => {
