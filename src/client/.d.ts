@@ -6,3 +6,4 @@ declare module '*.png'{
 declare module 'react-image-gallery';
 declare module 'react-images';
 declare module 'react-bnb-gallery';
+declare module 'react-compare-image';

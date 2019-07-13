@@ -2,6 +2,12 @@
 @import url(https://fonts.googleapis.com/css?family=EB+Garamond|Cardo:400italic);
 $bgColor: grey;
 
+.compareModal{
+  .myContent{ 
+    background: rgba(1,1,1,0.7) !important;
+  }
+ }
+
 .App {
     .goUp{
         position: fixed;
@@ -18,26 +24,34 @@ $bgColor: grey;
         cursor: pointer;
     }
    .gallery{
-        min-height: 100vh;
+       min-height: 100vh;
        height: auto;
        width: 100vw;
        display: flex;
        justify-content: center;
        align-items: center;
        .gal{
-        // height: 70%;
         max-width: 80%;
         background: black;
            @media screen and (max-width: 750px){
                width: 90vw;
            }
-        
+        }
+
+        .openSlider {
+          position: fixed;
+          width: 90vw;
+          height: 90vh;
+          z-index: 1000;
+        }
+        .closeSlider {
+          display: none;
         }
     }
     .header{ 
         height: 100vh;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         .header-01, .header2-01 {
             padding: 10em 0 10em 0;
@@ -50,6 +64,11 @@ $bgColor: grey;
             position: relative;
           }
           
+          .slider {
+            display: flex;
+            align-items: center;
+            z-index: 100;
+          }
           
           h1 {
             color: white;

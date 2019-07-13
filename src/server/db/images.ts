@@ -1,6 +1,7 @@
 interface IImages {
   id: number,
   src: string,
+  srcEdit: string,
   title: string,
   desc: string,
   orientation?: "landscape" | "portrait",
@@ -9,6 +10,7 @@ export const images: IImages[] = [
   {
     id: 1,
     src: "/images/DSC_0069.jpg",
+    srcEdit: "/images_edited/DSC_0069.jpg",
     title: "DSC_0069.jpg",
     desc: "Gałązka",
     orientation: "portrait",
@@ -16,24 +18,28 @@ export const images: IImages[] = [
   {
     id: 2,
     src: "/images/DSC_0092.jpg",
+    srcEdit: "/images_edited/DSC_0092.jpg",
     title: "DSC_0092.jpg",
     desc: "Koniczyna łąkowa (Trifolium pratense L.)",
   },
   {
     id: 3,
     src: "/images/DSC_0115.jpg",
+    srcEdit: "/images_edited/DSC_0115.jpg",
     title: "DSC_0115.jpg",
     desc: "Niecierpek Waleriana (Impatiens walleriana)",
   },
   {
     id: 4,
     src: "/images/DSC_0116.jpg",
+    srcEdit: "/images_edited/DSC_0116.jpg",
     title: "DSC_0116.jpg",
     desc: "Liść",
   },
   {
     id: 5,
     src: "/images/DSC_0133.jpg",
+    srcEdit: "/images_edited/DSC_0133.jpg",
     title: "DSC_0133.jpg",
     desc: "Liść",
     orientation: "portrait",
@@ -41,36 +47,42 @@ export const images: IImages[] = [
   {
     id: 6,
     src: "/images/DSC_0135.jpg",
+    srcEdit: "/images_edited/DSC_0135.jpg",
     title: "DSC_0135.jpg",
     desc: "Łątka dzieweczka (Coenagrion puella)",
   },
   {
     id: 7,
     src: "/images/DSC_0135_a.jpg",
+    srcEdit: "/images_edited/DSC_0135_a.jpg",
     title: "DSC_0135_a.jpg",
     desc: "Mniszek pospolity (Taraxacum officinale)",
   },
   {
     id: 8,
     src: "/images/DSC_0139.jpg",
+    srcEdit: "/images_edited/DSC_0139.jpg",
     title: "DSC_0139.jpg",
     desc: "Głowienka pospolita (Prunella vulgaris)",
   },
   {
     id: 9,
     src: "/images/DSC_0144.jpg",
+    srcEdit: "/images_edited/DSC_0144.jpg",
     title: "DSC_0144.jpg",
     desc: "Kostowcowate (Costaceae)",
   },
   {
     id: 10,
     src: "/images/DSC_0148.jpg",
+    srcEdit: "/images_edited/DSC_0148.jpg",
     title: "DSC_0148.jpg",
     desc: "Liść na wodzie",
   },
   {
     id: 11,
     src: "/images/DSC_0152.jpg",
+    srcEdit: "/images_edited/DSC_0152.jpg",
     title: "DSC_0152.jpg",
     desc: "Zaraza (Orobanche)",
     orientation: "portrait",
@@ -78,6 +90,7 @@ export const images: IImages[] = [
   {
     id: 12,
     src: "/images/DSC_0154.jpg",
+    srcEdit: "/images_edited/DSC_0154.jpg",
     title: "DSC_0154.jpg",
     desc: "Zaraza (Orobanche)",
     orientation: "portrait",
@@ -85,12 +98,14 @@ export const images: IImages[] = [
   {
     id: 13,
     src: "/images/DSC_0162.jpg",
+    srcEdit: "/images_edited/DSC_0162.jpg",
     title: "DSC_0162.jpg",
     desc: "Stokrotka pospolita (Bellis perennis)",
   },
   {
     id: 14,
     src: "/images/DSC_0167.jpg",
+    srcEdit: "/images_edited/DSC_0167.jpg",
     title: "DSC_0167.jpg",
     desc: "Lawenda wąskolistna (Lavandula angustifolia)",
     orientation: "portrait",
@@ -98,6 +113,7 @@ export const images: IImages[] = [
   {
     id: 15,
     src: "/images/DSC_0170.jpg",
+    srcEdit: "/images_edited/DSC_0170.jpg",
     title: "DSC_0170.jpg",
     desc: "Krwawnica pospolita (Lythrum salicaria)",
     orientation: "portrait",
@@ -105,12 +121,14 @@ export const images: IImages[] = [
   {
     id: 16,
     src: "/images/DSC_0172.jpg",
+    srcEdit: "/images_edited/DSC_0172.jpg",
     title: "DSC_0172.jpg",
     desc: "Pajęczyna",
   },
   {
     id: 17,
     src: "/images/DSC_0178.jpg",
+    srcEdit: "/images_edited/DSC_0178.jpg",
     title: "DSC_0178.jpg",
     desc: "Lawenda wąskolistna (Lavandula angustifolia)",
     orientation: "portrait",
@@ -118,18 +136,21 @@ export const images: IImages[] = [
   {
     id: 18,
     src: "/images/DSC_0178_a.jpg",
+    srcEdit: "/images_edited/DSC_0178_a.jpg",
     title: "DSC_0178_a.jpg",
     desc: "Cynia wąskolistna (zinnia angustifolia)",
   },
   {
     id: 19,
     src: "/images/DSC_0180.jpg",
+    srcEdit: "/images_edited/DSC_0180.jpg",
     title: "DSC_0180.jpg",
     desc: "Cynia wąskolistna (zinnia angustifolia)",
   },
   {
     id: 20,
     src: "/images/DSC_0186.jpg",
+    srcEdit: "/images_edited/DSC_0186.jpg",
     title: "DSC_0186.jpg",
     desc: "Lawenda wąskolistna (Lavandula angustifolia)",
     orientation: "portrait",
@@ -137,30 +158,35 @@ export const images: IImages[] = [
   {
     id: 21,
     src: "/images/DSC_0189.jpg",
+    srcEdit: "/images_edited/DSC_0189.jpg",
     title: "DSC_0189.jpg",
     desc: "Aksamitka rozpierzchła (Tagetes erecta)",
   },
   {
     id: 22,
     src: "/images/DSC_0191.jpg",
+    srcEdit: "/images_edited/DSC_0191.jpg",
     title: "DSC_0191.jpg",
     desc: "Lawenda wąskolistna (Lavandula angustifolia)",
   },
   {
     id: 23,
     src: "/images/DSC_0190.jpg",
+    srcEdit: "/images_edited/DSC_0190.jpg",
     title: "DSC_0190.jpg",
     desc: "Aksamitka rozpierzchła (Tagetes erecta)",
   },
   {
     id: 24,
     src: "/images/DSC_0248.jpg",
+    srcEdit: "/images_edited/DSC_0248.jpg",
     title: "DSC_0248.jpg",
     desc: "Lilak pospolity (Syringa vulgaris)",
   },
   {
     id: 25,
     src: "/images/DSC_0264.jpg",
+    srcEdit: "/images_edited/DSC_0264.jpg",
     title: "DSC_0264.jpg",
     desc: "Owoce",
     orientation: "portrait",
@@ -168,6 +194,7 @@ export const images: IImages[] = [
   {
     id: 26,
     src: "/images/DSC_0266.jpg",
+    srcEdit: "/images_edited/DSC_0266.jpg",
     title: "DSC_0266.jpg",
     desc: "Porzeczka czerwona (Ribes spicatum)",
     orientation: "portrait",
@@ -175,6 +202,7 @@ export const images: IImages[] = [
   {
     id: 27,
     src: "/images/DSC_0269.jpg",
+    srcEdit: "/images_edited/DSC_0269.jpg",
     title: "DSC_0269.jpg",
     desc: "Porzeczka czerwona (Ribes spicatum)",
     orientation: "portrait",
@@ -182,6 +210,7 @@ export const images: IImages[] = [
   {
     id: 28,
     src: "/images/DSC_0314.jpg",
+    srcEdit: "/images_edited/DSC_0314.jpg",
     title: "DSC_0314.jpg",
     desc: "Dereń kwiecisty (Cornus florida)",
     orientation: "portrait",
@@ -189,6 +218,7 @@ export const images: IImages[] = [
   {
     id: 29,
     src: "/images/DSC_0320.jpg",
+    srcEdit: "/images_edited/DSC_0320.jpg",
     title: "DSC_0320.jpg",
     desc: "Floribunda",
     orientation: "portrait",

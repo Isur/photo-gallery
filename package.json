@@ -82,6 +82,7 @@
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-bnb-gallery": "^1.1.6",
+    "react-compare-image": "^1.3.0",
     "react-dom": "^16.8.6",
     "react-image-gallery": "^0.8.17",
     "react-images": "^1.0.0",

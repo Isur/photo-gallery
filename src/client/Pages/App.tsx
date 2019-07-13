@@ -6,41 +6,35 @@ import "react-image-gallery/styles/scss/image-gallery.scss";
 import Gallery from "react-photo-gallery";
 import ReactBnbGallery from "react-bnb-gallery";
 import "./App.scss";
+import Comparer from "./Comparer";
 
 interface IState {
   page: number,
   loading: boolean,
   galleryIsOpen: boolean,
   currentImage: number,
-  images: MyImages,
+  images: IImage[],
+  comparer: boolean,
+  sliderPosition: number,
 }
 
-type MyImages = {
+export interface IImage {
   photo: string,
   src: string,
+  srcedit: string,
   width: number,
   height: number,
   subcaption: string,
-  caption: string, }[];
-
-interface IImage {
-  original: string,
-  thumbnail: string,
-  thumbnailTitle?: string,
-  thumbnailLabel?: string,
-}
+  caption: string, }
 
 interface IProps {}
 
 export default class App extends React.Component<IProps, IState> {
   refStart: React.RefObject<HTMLDivElement>;
-
   refGallery: React.RefObject<HTMLDivElement>;
-
+  refComparer: React.RefObject<HTMLDivElement>;
   refDev: React.RefObject<HTMLDivElement>;
-
   refLoc: React.RefObject<HTMLDivElement>;
-
   refEnd: React.RefObject<HTMLDivElement>;
 
   constructor(props: IProps) {
@@ -52,9 +46,12 @@ export default class App extends React.Component<IProps, IState> {
       galleryIsOpen: false,
       currentImage: 0,
       images: [],
+      comparer: true,
+      sliderPosition: 0.5,
     };
     this.refStart = React.createRef();
     this.refGallery = React.createRef();
+    this.refComparer = React.createRef();
     this.refDev = React.createRef();
     this.refLoc = React.createRef();
     this.refEnd = React.createRef();
@@ -81,12 +78,13 @@ export default class App extends React.Component<IProps, IState> {
         url: `/api/images/${i}`,
       });
       const img = {
-        src: `data:image/jpg;base64, ${response.data.image.base64}`,
+        src: `data:image/jpg;base64, ${response.data.image.base64Edited}`,
+        srcedit: `data:image/jpg;base64, ${response.data.image.base64}`,
         width: response.data.image.orientation === "portrait" ? 2 : 3,
         height: response.data.image.orientation === "portrait" ? 3 : 2,
         subcaption: response.data.image.title,
         caption: response.data.image.desc,
-        photo: `data:image/jpg;base64, ${response.data.image.base64}`,
+        photo: `data:image/jpg;base64, ${response.data.image.base64Edited}`,
       };
 
       this.setState(state => ({ images: [...state.images, img] }));
@@ -95,8 +93,10 @@ export default class App extends React.Component<IProps, IState> {
 
   handleScroll = () => {
     if(window.pageYOffset > 0.5 * window.innerHeight + this.refLoc.current.offsetTop) {
-      this.setState({ page: 4 });
+      this.setState({ page: 5 });
     } else if(window.pageYOffset > 0.5 * window.innerHeight + this.refDev.current.offsetTop) {
+      this.setState({ page: 4 });
+    } else if(window.pageYOffset > 0.5 * window.innerHeight + this.refComparer.current.offsetTop) {
       this.setState({ page: 3 });
     } else if(window.pageYOffset > 0.5 * window.innerHeight + this.refGallery.current.offsetTop) {
       this.setState({ page: 2 });
@@ -119,12 +119,16 @@ export default class App extends React.Component<IProps, IState> {
         this.setState({ page: 1 });
         break;
       case 3:
-        window.scrollTo({ behavior: "smooth", top: this.refDev.current.offsetTop });
+        window.scrollTo({ behavior: "smooth", top: this.refComparer.current.offsetTop });
         this.setState({ page: 2 });
         break;
       case 4:
-        window.scrollTo({ behavior: "smooth", top: this.refLoc.current.offsetTop });
+        window.scrollTo({ behavior: "smooth", top: this.refDev.current.offsetTop });
         this.setState({ page: 3 });
+        break;
+      case 5:
+        window.scrollTo({ behavior: "smooth", top: this.refLoc.current.offsetTop });
+        this.setState({ page: 4 });
         break;
       default: break;
     }
@@ -138,16 +142,20 @@ export default class App extends React.Component<IProps, IState> {
         this.setState({ page: 1 });
         break;
       case 1:
-        window.scrollTo({ behavior: "smooth", top: this.refDev.current.offsetTop });
+        window.scrollTo({ behavior: "smooth", top: this.refComparer.current.offsetTop });
         this.setState({ page: 2 });
         break;
       case 2:
-        window.scrollTo({ behavior: "smooth", top: this.refLoc.current.offsetTop });
+        window.scrollTo({ behavior: "smooth", top: this.refDev.current.offsetTop });
         this.setState({ page: 3 });
         break;
       case 3:
-        window.scrollTo({ behavior: "smooth", top: this.refEnd.current.offsetTop });
+        window.scrollTo({ behavior: "smooth", top: this.refLoc.current.offsetTop });
         this.setState({ page: 4 });
+        break;
+      case 4:
+        window.scrollTo({ behavior: "smooth", top: this.refEnd.current.offsetTop });
+        this.setState({ page: 5 });
         break;
       default: break;
     }
@@ -155,6 +163,24 @@ export default class App extends React.Component<IProps, IState> {
 
   handleToggleGallery = (i = this.state.currentImage) => {
     this.setState(state => ({ galleryIsOpen: !state.galleryIsOpen, currentImage: i }));
+  }
+
+  handleCloseGaller = () => {
+    this.setState({ galleryIsOpen: false });
+  }
+
+  handleNextPhoto = () => {
+    this.setState(state => ({
+      currentImage: state.currentImage === state.images.length - 1 ? 0 : state.currentImage + 1,
+      sliderPosition: 0.5,
+    }));
+  }
+
+  handlePreviousPhoto = () => {
+    this.setState(state => ({
+      currentImage: state.currentImage === 0 ? state.images.length - 1 : state.currentImage - 1,
+      sliderPosition: 0.5,
+    }));
   }
 
   render(): React.ReactNode {
@@ -191,8 +217,15 @@ export default class App extends React.Component<IProps, IState> {
                            show={galleryIsOpen}
                            onClose={this.handleToggleGallery}
                            activePhotoIndex={currentImage} />
+                                       
         </div>
-
+        <div className="header slid" ref={this.refComparer}>
+          <Icon color="teal" name="chevron circle left" size="huge" onClick={this.handlePreviousPhoto} />
+          <div className="slider" onClick={() => this.setState({ sliderPosition: 0.5 })}>
+            <Comparer image={images[currentImage]} />
+          </div>
+          <Icon color="teal" name="chevron circle right" size="huge" onClick={this.handleNextPhoto} />
+        </div>
         <div className="header" ref={this.refDev}>
           <div className="header-01">
             <h1 className="header-02">

@@ -114,7 +114,7 @@ module.exports = {
     "require-atomic-updates": "warn",
     "use-isnan": "error",
     "no-label-var": "warn",
-    "no-unused-vars": "warn",
+    // "no-unused-vars": "warn",
     "array-bracket-spacing": ["warn", "never"],
     "block-spacing": ["warn", "always"],
     "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
@@ -146,7 +146,7 @@ module.exports = {
       }
     }],
     "linebreak-style": "error",
-    "lines-between-class-members": "warn",
+    "lines-between-class-members": ["warn", "always", { exceptAfterSingleLine: true }],
     "max-len":["error", {
       "code": 100,
       "comments": 120,
@@ -288,7 +288,7 @@ module.exports = {
     "import/no-useless-path-segments": ["error", {
       "noUselessIndex": true,
     }],
-    "import/no-unused-modules": "warn",
+    // "import/no-unused-modules": "warn",
     "import/export": "warn",
     "import/no-named-as-default": "warn",
     "import/no-named-as-default-member": "warn",
