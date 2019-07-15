@@ -196,7 +196,7 @@ export default class App extends React.Component<IProps, IState> {
         {page > 0 && <div className="goUp">
           <Icon color="teal" name="angle double up" size="huge" onClick={this.handleScrollUp} />
         </div>}
-        {page < 4 && <div className="goDown">
+        {page < 5 && <div className="goDown">
           <Icon color="teal" name="angle double down" size="huge" onClick={this.handleScrollDown} />
         </div>}
         <div className="header" ref={this.refStart}>
